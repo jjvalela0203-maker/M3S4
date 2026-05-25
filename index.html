@@ -1,0 +1,134 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Micaela SPA</title>
+    <link rel="stylesheet" href="src/style.css">
+  </head>
+  <body>
+
+    <!-- ═══════════════ VIEW: LOGIN ═══════════════ -->
+    <div id="view-login" class="view active">
+      <div class="login-container">
+        <img src="src/assets/img/Trifuerza.png" alt="Logo">
+        <h1>Welcome back</h1>
+        <p>Don't have an account? <a id="registerLink" href="#">Sign up</a></p>
+        <form id="loginForm">
+          <label for="username">Username</label>
+          <input type="text" id="username" name="username" placeholder="your.username" autocomplete="username">
+          <label for="password">Password</label>
+          <input type="password" id="password" name="password" placeholder="••••••••" autocomplete="current-password">
+          <button id="login" type="submit">Sign In →</button>
+        </form>
+      </div>
+    </div>
+
+    <!-- ═══════════════ VIEW: REGISTER ═══════════════ -->
+    <div id="view-register" class="view">
+      <div class="register-container">
+        <form id="registerForm">
+          <label for="newusername">Username</label>
+          <input type="text" id="newusername" name="newusername" placeholder="your.username">
+
+          <label for="newpassword">Password</label>
+          <input type="password" id="newpassword" name="newpassword" placeholder="••••••••">
+
+          <label for="fullname">Full Name</label>
+          <input type="text" id="fullname" name="name" placeholder="John Doe">
+
+          <!-- id único para no chocar con card-birthdate en el formulario de gestión -->
+          <label for="reg-birthdate">Birthdate</label>
+          <input type="date" id="reg-birthdate" name="birthdate">
+
+          <label for="email">Email</label>
+          <input type="email" id="email" name="email" placeholder="you@example.com">
+
+          <!-- id único para no chocar con card-description -->
+          <label for="reg-description">About you</label>
+          <textarea id="reg-description" name="description" placeholder="Tell us a bit about yourself..."></textarea>
+
+          <!-- id único para no chocar con card-url -->
+          <label for="reg-url">Photo URL</label>
+          <input type="url" id="reg-url" name="url" placeholder="https://...">
+
+          <button type="submit" id="register">Create Account</button>
+        </form>
+        <!-- id único para no chocar con el cancel del formulario de gestión -->
+        <button id="cancel">← Back to Login</button>
+      </div>
+    </div>
+
+    <!-- ═══════════════ VIEW: DASHBOARD ═══════════════ -->
+    <div id="view-dashboard" class="view">
+      <header class="dashboard-header">
+        <div class="header-left">
+          <h1 id="dashboard-title">Dashboard</h1>
+          <p>Sesión activa</p>
+        </div>
+        <button id="logout">Cerrar Sesión</button>
+      </header>
+
+      <!-- Tarjeta del usuario logueado (ya existía) -->
+      <div id="dashboard-container"></div>
+
+      <!-- ── SECCIÓN DE GESTIÓN DE TARJETAS ── -->
+      <!--
+        Esta sección es nueva. Contiene:
+        1. La barra de búsqueda y el botón "Nueva tarjeta"
+        2. El formulario para crear una tarjeta (oculto por defecto)
+        3. El contenedor donde se pintan las tarjetas del JSON  
+      -->
+
+      <div class="gestion-wrapper">
+
+        <!-- Barra superior: buscador + botón nuevo -->
+        <div class="gestion-topbar">
+          <input type="text" id="card-search-input" placeholder="Buscar por nombre..." class="gestion-search" />
+          <button id="card-search-btn" class="gestion-btn-search">Buscar</button>
+          <button id="card-new-btn" class="gestion-btn-new">+ Nueva tarjeta</button>
+        </div>
+
+        <!-- Formulario de creación, oculto por defecto con la clase "hidden" -->
+        <!--
+          Usamos id con prefijo "card-" en todos los campos para que no choquen
+          con los id del formulario de registro (reg-url, reg-description, etc.)
+        -->
+        <form id="card-form" class="card-form hidden">
+          <div class="card-form-grid">
+            <div>
+              <label for="card-name">Name</label>
+              <input type="text" id="card-name" placeholder="John" required />
+            </div>
+            <div>
+              <label for="card-lastname">Lastname</label>
+              <input type="text" id="card-lastname" placeholder="Doe" required />
+            </div>
+            <div>
+              <label for="card-url">Photo URL</label>
+              <input type="text" id="card-url" placeholder="https://..." required />
+            </div>
+            <div>
+              <label for="card-birthdate">Birthdate</label>
+              <input type="date" id="card-birthdate" required />
+            </div>
+            <div class="card-form-full">
+              <label for="card-description">Description</label>
+              <textarea id="card-description" rows="3" required></textarea>
+            </div>
+          </div>
+          <div class="card-form-actions">
+            <button type="button" id="card-cancel-btn">Cancelar</button>
+            <button type="submit" id="card-create-btn">Crear</button>
+          </div>
+        </form>
+
+        <!-- Aquí se pintan las tarjetas traídas del JSON -->
+        <div id="card-data"></div>
+
+      </div>
+    </div>
+
+    <script src="src/app.js"></script>
+  </body>
+</html>

@@ -1,0 +1,783 @@
+@import url('https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap');
+
+:root {
+  --bg: #0a0a0f;
+  --surface: rgba(255,255,255,0.04);
+  --surface-hover: rgba(255,255,255,0.08);
+  --border: rgba(255,255,255,0.09);
+  --border-accent: rgba(255,210,0,0.5);
+  --accent: #ffd200;
+  --accent-dim: rgba(255,210,0,0.15);
+  --text: #f0ede8;
+  --text-muted: rgba(240,237,232,0.45);
+  --text-subtle: rgba(240,237,232,0.25);
+  --danger: #ff4d6d;
+  --radius: 16px;
+  --radius-sm: 10px;
+  --shadow: 0 8px 40px rgba(0,0,0,0.6);
+  --glow: 0 0 40px rgba(255,210,0,0.12);
+}
+
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: 'DM Sans', sans-serif;
+  background-color: var(--bg);
+  color: var(--text);
+  min-height: 100vh;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ─── BACKGROUND MESH ─── */
+.index, .dashboard {
+  position: relative;
+  overflow: hidden;
+}
+
+.index::before, .register::before, .dashboard::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background:
+    radial-gradient(ellipse 80% 60% at 20% 10%, rgba(255,210,0,0.07) 0%, transparent 60%),
+    radial-gradient(ellipse 60% 50% at 80% 90%, rgba(120,60,255,0.06) 0%, transparent 60%),
+    radial-gradient(ellipse 40% 40% at 50% 50%, rgba(255,100,80,0.04) 0%, transparent 70%);
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* Grid texture */
+.index::after, .register::after {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background-image:
+    linear-gradient(rgba(255,255,255,0.015) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,0.015) 1px, transparent 1px);
+  background-size: 60px 60px;
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* ─── LOGIN PAGE ─── */
+.index {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+}
+
+.login-container {
+  position: relative;
+  z-index: 1;
+  width: 380px;
+  padding: 44px 40px;
+  background: rgba(255,255,255,0.035);
+  border: 1px solid var(--border);
+  border-radius: 24px;
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+  box-shadow: var(--shadow), var(--glow), inset 0 1px 0 rgba(255,255,255,0.07);
+  animation: slideUp 0.6s cubic-bezier(0.16,1,0.3,1) both;
+}
+
+.login-container img {
+  display: block;
+  margin: 0 auto 20px;
+  width: 48px;
+  height: auto;
+  filter: drop-shadow(0 0 12px rgba(255,210,0,0.5));
+}
+
+.login-container h1 {
+  font-family: 'Syne', sans-serif;
+  font-size: 2rem;
+  font-weight: 800;
+  text-align: center;
+  letter-spacing: -0.03em;
+  color: var(--text);
+  margin-bottom: 6px;
+}
+
+.login-container p {
+  text-align: center;
+  font-size: 0.875rem;
+  color: var(--text-muted);
+  margin-bottom: 28px;
+}
+
+.login-container p a, .login-container a {
+  color: var(--accent);
+  text-decoration: none;
+  font-weight: 500;
+  transition: opacity 0.2s;
+}
+
+.login-container p a:hover { opacity: 0.75; }
+
+/* ─── FORMS ─── */
+.login-container form, .register-container form {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+
+label {
+  font-size: 0.75rem;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  margin-bottom: 6px;
+  margin-top: 14px;
+  display: block;
+}
+
+input[type="text"],
+input[type="password"],
+input[type="email"],
+input[type="date"],
+input[type="url"],
+textarea {
+  width: 100%;
+  padding: 11px 16px;
+  background: rgba(255,255,255,0.05);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  color: var(--text);
+  font-family: 'DM Sans', sans-serif;
+  font-size: 0.9375rem;
+  transition: border-color 0.2s, background 0.2s, box-shadow 0.2s;
+  outline: none;
+}
+
+input[type="date"]::-webkit-calendar-picker-indicator {
+  filter: invert(0.6);
+  cursor: pointer;
+}
+
+input:focus, textarea:focus {
+  border-color: rgba(255,210,0,0.5);
+  background: rgba(255,210,0,0.04);
+  box-shadow: 0 0 0 3px rgba(255,210,0,0.08);
+}
+
+textarea {
+  resize: vertical;
+  min-height: 90px;
+  line-height: 1.5;
+}
+
+/* ─── BUTTONS ─── */
+button {
+  font-family: 'Syne', sans-serif;
+  font-weight: 700;
+  font-size: 0.9375rem;
+  border: none;
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  transition: all 0.2s cubic-bezier(0.16,1,0.3,1);
+  letter-spacing: 0.01em;
+}
+
+#login, #register {
+  width: 100%;
+  margin-top: 22px;
+  padding: 15px 20px;
+  background: var(--accent);
+  color: #0a0a0f;
+  box-shadow: 0 4px 20px rgba(255,210,0,0.3);
+}
+
+#login:hover, #register:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 28px rgba(255,210,0,0.45);
+  background: #ffe033;
+}
+
+#login:active, #register:active {
+  transform: translateY(0);
+}
+
+#cancel {
+  width: 100%;
+  margin-top: 10px;
+  padding: 12px 20px;
+  background: transparent;
+  color: var(--text-muted);
+  border: 1px solid var(--border);
+}
+
+#cancel:hover {
+  background: var(--surface-hover);
+  color: var(--text);
+  border-color: rgba(255,255,255,0.2);
+}
+
+/* ─── REGISTER PAGE ─── */
+.register {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-height: 100vh;
+  padding: 40px 20px;
+  overflow-y: auto;
+}
+
+.register-container {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  max-width: 440px;
+  padding: 40px 36px;
+  background: rgba(255,255,255,0.035);
+  border: 1px solid var(--border);
+  border-radius: 24px;
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+  box-shadow: var(--shadow), var(--glow), inset 0 1px 0 rgba(255,255,255,0.07);
+  animation: slideUp 0.6s cubic-bezier(0.16,1,0.3,1) both;
+}
+
+.register-container::before {
+  content: 'Create Account';
+  display: block;
+  font-family: 'Syne', sans-serif;
+  font-size: 1.75rem;
+  font-weight: 800;
+  letter-spacing: -0.03em;
+  color: var(--text);
+  margin-bottom: 4px;
+}
+
+.register-container::after {
+  content: 'Fill in your details to get started';
+  display: block;
+  font-size: 0.875rem;
+  color: var(--text-muted);
+  margin-bottom: 8px;
+}
+
+/* ─── DASHBOARD ─── */
+.dashboard {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+.dashboard-header {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 16px 32px;
+  background: rgba(10,10,15,0.75);
+  border-bottom: 1px solid var(--border);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+}
+
+.dashboard-header h1 {
+  font-family: 'Syne', sans-serif;
+  font-size: 1.125rem;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  color: var(--text);
+}
+
+.dashboard-header p {
+  font-size: 0.8125rem;
+  color: var(--text-muted);
+  margin: 0;
+}
+
+.header-left { display: flex; flex-direction: column; gap: 2px; }
+
+#logout {
+  padding: 9px 20px;
+  background: transparent;
+  color: var(--danger);
+  border: 1px solid rgba(255,77,109,0.35);
+  font-size: 0.875rem;
+}
+
+#logout:hover {
+  background: rgba(255,77,109,0.1);
+  border-color: var(--danger);
+  transform: translateY(-1px);
+}
+
+#dashboard-container {
+  position: relative;
+  z-index: 1;
+  flex: 1;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  justify-content: center;
+  padding: 48px 32px;
+  gap: 24px;
+}
+
+/* ─── CARD ─── */
+.card {
+  position: relative;
+  width: 340px;
+  background: rgba(255,255,255,0.04);
+  border: 1px solid var(--border);
+  border-radius: 20px;
+  overflow: hidden;
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  box-shadow: var(--shadow);
+  animation: slideUp 0.5s cubic-bezier(0.16,1,0.3,1) both;
+  transition: transform 0.3s cubic-bezier(0.16,1,0.3,1), box-shadow 0.3s;
+}
+
+.card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 20px 60px rgba(0,0,0,0.7), var(--glow);
+  border-color: var(--border-accent);
+}
+
+.card-figure {
+  position: relative;
+  height: 220px;
+  overflow: hidden;
+}
+
+.card-image {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  display: block;
+  transition: transform 0.5s cubic-bezier(0.16,1,0.3,1);
+}
+
+.card:hover .card-image {
+  transform: scale(1.04);
+}
+
+/* Gradient overlay on image */
+.card-figure::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 60%;
+  background: linear-gradient(to bottom, transparent, rgba(10,10,15,0.9));
+  pointer-events: none;
+}
+
+.card-age {
+  position: absolute;
+  bottom: 12px;
+  right: 14px;
+  z-index: 1;
+  font-family: 'Syne', sans-serif;
+  font-size: 0.8125rem;
+  font-weight: 700;
+  padding: 4px 12px;
+  background: var(--accent);
+  color: #0a0a0f;
+  border-radius: 99px;
+  letter-spacing: 0.04em;
+}
+
+.card article {
+  padding: 18px 20px 0;
+}
+
+.card-title {
+  font-family: 'Syne', sans-serif;
+  font-size: 1.25rem;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  color: var(--text);
+  margin-bottom: 20px;
+}
+
+.card-description {
+  padding: 14px 20px 20px;
+  text-align: left;
+  margin-bottom: 20px;
+}
+
+.card-description p {
+  font-size: 0.875rem;
+  color: var(--text-muted);
+  line-height: 1.6;
+  margin-bottom: 8px;
+}
+
+.card-description p:last-child { margin-bottom: 0; }
+
+.card-description b {
+  color: var(--accent);
+  font-weight: 500;
+}
+
+/* ─── ANIMATIONS ─── */
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(24px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ─── SCROLLBAR ─── */
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb {
+  background: rgba(255,255,255,0.1);
+  border-radius: 99px;
+}
+::-webkit-scrollbar-thumb:hover { background: rgba(255,255,255,0.2); }
+
+/* ─── RESPONSIVE ─── */
+@media (max-width: 480px) {
+  .login-container, .register-container {
+    padding: 32px 24px;
+    width: 100%;
+    border-radius: 20px;
+  }
+
+  .dashboard-header {
+    padding: 12px 16px;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+
+  #dashboard-container {
+    padding: 24px 16px;
+  }
+
+  .card { width: 100%; }
+}
+/* ─── VIEWS ─── */
+.view { display: none; }
+.view.active { display: flex; }
+
+
+#view-login { align-items: center; justify-content: center; min-height: 100vh; position: relative; overflow: hidden; }
+#view-register { position: relative; flex-direction: column; align-items: center; min-height: 100vh; padding: 40px 20px; overflow-y: auto; }
+#view-dashboard { flex-direction: column; min-height: 100vh; }
+
+#view-login::before, #view-register::before, #view-dashboard::before { content: ''; position: fixed; inset: 0; background: radial-gradient(ellipse 80% 60% at 20% 10%, rgba(255,210,0,0.07) 0%, transparent 60%), radial-gradient(ellipse 60% 50% at 80% 90%, rgba(120,60,255,0.06) 0%, transparent 60%), radial-gradient(ellipse 40% 40% at 50% 50%, rgba(255,100,80,0.04) 0%, transparent 70%); pointer-events: none; z-index: 0; }
+#view-login::after, #view-register::after { content: ''; position: fixed; inset: 0; background-image: linear-gradient(rgba(255,255,255,0.015) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.015) 1px, transparent 1px); background-size: 60px 60px; pointer-events: none; z-index: 0; }
+
+
+/* ═══════════════════════════════════════════════════════
+   SECCIÓN DE GESTIÓN DE TARJETAS
+   Todos estos estilos son nuevos y siguen las mismas
+   variables CSS (--accent, --border, --text-muted, etc.)
+   que usa el resto del proyecto, para mantener coherencia visual.
+   ═══════════════════════════════════════════════════════ */
+
+/*
+  .gestion-wrapper es el contenedor principal de toda la sección.
+  Usa padding para separarse del borde de la pantalla,
+  igual que el dashboard-header usa padding: 16px 32px.
+  border-top crea una línea divisoria sutil entre la tarjeta
+  del usuario y esta sección, usando la misma variable --border del proyecto.
+*/
+.gestion-wrapper {
+  width: 100%;
+  padding: 32px;
+  border-top: 1px solid var(--border);
+  position: relative;
+  z-index: 1;
+}
+
+/*
+  .gestion-topbar es la barra superior con el buscador y los botones.
+  display: flex con gap los separa uniformemente.
+  flex-wrap: wrap hace que en pantallas pequeñas los elementos
+  bajen a la siguiente línea en lugar de desbordarse.
+  align-items: center los alinea verticalmente al centro.
+*/
+.gestion-topbar {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+  margin-bottom: 28px;
+}
+
+/*
+  .gestion-search es el input de búsqueda.
+  flex: 1 hace que ocupe todo el espacio disponible,
+  empujando los botones hacia la derecha.
+  Los demás estilos (background, border, color, etc.) son iguales
+  a los que ya tiene el CSS para inputs normales, para que sea consistente.
+*/
+.gestion-search {
+  flex: 1;
+  min-width: 200px;
+  padding: 10px 16px;
+  background: rgba(255,255,255,0.05);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  color: var(--text);
+  font-family: 'DM Sans', sans-serif;
+  font-size: 0.9375rem;
+  outline: none;
+  transition: border-color 0.2s, background 0.2s, box-shadow 0.2s;
+}
+
+.gestion-search:focus {
+  border-color: rgba(255,210,0,0.5);
+  background: rgba(255,210,0,0.04);
+  box-shadow: 0 0 0 3px rgba(255,210,0,0.08);
+}
+
+/*
+  .gestion-btn-search es el botón "Buscar".
+  Usa los colores de superficie del proyecto (--surface, --surface-hover)
+  en lugar del amarillo --accent, para que visualmente sea secundario
+  respecto al botón "Nueva tarjeta".
+*/
+.gestion-btn-search {
+  padding: 10px 20px;
+  background: var(--surface);
+  color: var(--text);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  transition: all 0.2s cubic-bezier(0.16,1,0.3,1);
+}
+
+.gestion-btn-search:hover {
+  background: var(--surface-hover);
+  border-color: rgba(255,255,255,0.2);
+  transform: translateY(-1px);
+}
+
+/*
+  .gestion-btn-new es el botón principal de acción.
+  Usa --accent (el amarillo) igual que los botones primarios
+  del login y registro, para que tenga el mismo peso visual.
+*/
+.gestion-btn-new {
+  padding: 10px 24px;
+  background: var(--accent);
+  color: #0a0a0f;
+  border-radius: var(--radius-sm);
+  box-shadow: 0 4px 20px rgba(255,210,0,0.3);
+  transition: all 0.2s cubic-bezier(0.16,1,0.3,1);
+}
+
+.gestion-btn-new:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 28px rgba(255,210,0,0.45);
+  background: #ffe033;
+}
+
+.gestion-btn-new:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+  transform: none;
+}
+
+/*
+  .card-form es el formulario de creación de tarjetas.
+  Mismo estilo de "panel" que el login-container y register-container:
+  fondo semitransparente, borde sutil, border-radius, backdrop-filter.
+  margin-bottom separa el formulario de las tarjetas debajo.
+*/
+.card-form {
+  background: rgba(255,255,255,0.035);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 28px;
+  margin-bottom: 32px;
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  box-shadow: var(--shadow);
+  animation: slideUp 0.4s cubic-bezier(0.16,1,0.3,1) both;
+}
+
+/*
+  .hidden es la clase que usamos para ocultar el formulario.
+  display: none lo saca completamente del flujo del documento,
+  a diferencia de visibility: hidden que deja el espacio ocupado.
+  JavaScript agrega o quita esta clase con classList.add/remove.
+*/
+.hidden {
+  display: none !important;
+}
+
+/*
+  .card-form-grid organiza los campos del formulario en dos columnas.
+  gap: 16px da espacio entre los campos sin necesitar margins individuales.
+*/
+.card-form-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+  margin-bottom: 20px;
+}
+
+/*
+  .card-form-full hace que un campo ocupe las dos columnas.
+  Lo usamos para el textarea de descripción que necesita más espacio.
+  grid-column: 1 / -1 significa "desde la columna 1 hasta la última".
+*/
+.card-form-full {
+  grid-column: 1 / -1;
+}
+
+/*
+  .card-form-actions es la fila de botones del formulario (Cancelar / Crear).
+  justify-content: flex-end los empuja hacia la derecha,
+  igual que muchos formularios profesionales que ponen las acciones al final.
+*/
+.card-form-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 12px;
+}
+
+/*
+  Botón Cancelar del formulario de tarjetas.
+  Estilo "ghost": sin fondo, solo borde, para que sea visualmente secundario.
+  Igual al botón #cancel del login.
+*/
+#card-cancel-btn {
+  padding: 10px 24px;
+  background: transparent;
+  color: var(--text-muted);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+}
+
+#card-cancel-btn:hover {
+  background: var(--surface-hover);
+  color: var(--text);
+  border-color: rgba(255,255,255,0.2);
+}
+
+/*
+  Botón Crear del formulario.
+  Mismo estilo que #login y #register: fondo amarillo --accent,
+  texto oscuro, sombra dorada. Es el botón de acción principal.
+*/
+#card-create-btn {
+  padding: 10px 28px;
+  background: var(--accent);
+  color: #0a0a0f;
+  border-radius: var(--radius-sm);
+  box-shadow: 0 4px 20px rgba(255,210,0,0.3);
+}
+
+#card-create-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 28px rgba(255,210,0,0.45);
+  background: #ffe033;
+}
+
+#card-create-btn:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+  transform: none;
+}
+
+/*
+  #card-data es el contenedor donde se pintan las tarjetas del JSON.
+  display: flex con flex-wrap: wrap hace que las tarjetas se acomoden
+  en filas automáticamente según el ancho disponible.
+  gap: 24px es el mismo espacio que usa #dashboard-container.
+*/
+#card-data {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 24px;
+  justify-content: flex-start;
+}
+
+/*
+  .card-actions es la fila de botones Editar / Eliminar dentro de cada tarjeta.
+  border-top separa visualmente los botones del contenido de la tarjeta.
+  La misma variable --border del proyecto para consistencia.
+*/
+.card-actions {
+  display: flex;
+  justify-content: space-between;
+  padding: 14px 20px;
+  border-top: 1px solid var(--border);
+  gap: 10px;
+}
+
+/*
+  .btn-edit: botón de acción secundaria.
+  Usa un tono ámbar/dorado más suave, relacionado con --accent
+  pero sin ser el amarillo puro, para diferenciarlo del botón Crear.
+*/
+.btn-edit {
+  flex: 1;
+  padding: 9px 0;
+  background: rgba(255,210,0,0.1);
+  color: var(--accent);
+  border: 1px solid rgba(255,210,0,0.25);
+  border-radius: var(--radius-sm);
+  font-size: 0.875rem;
+}
+
+.btn-edit:hover {
+  background: rgba(255,210,0,0.2);
+  border-color: var(--accent);
+  transform: translateY(-1px);
+}
+
+/*
+  .btn-delete: botón de acción destructiva.
+  Usa --danger (el rojo del proyecto) igual que el botón de logout,
+  para que el usuario lo identifique visualmente como una acción peligrosa.
+*/
+.btn-delete {
+  flex: 1;
+  padding: 9px 0;
+  background: rgba(255,77,109,0.1);
+  color: var(--danger);
+  border: 1px solid rgba(255,77,109,0.25);
+  border-radius: var(--radius-sm);
+  font-size: 0.875rem;
+}
+
+.btn-delete:hover {
+  background: rgba(255,77,109,0.2);
+  border-color: var(--danger);
+  transform: translateY(-1px);
+}
+
+/* ─── RESPONSIVE para la sección de gestión ─── */
+/*
+  En pantallas pequeñas el formulario pasa a una sola columna,
+  igual que las tarjetas que ya se hacen width: 100% en el breakpoint existente.
+*/
+@media (max-width: 480px) {
+  .gestion-wrapper {
+    padding: 20px 16px;
+  }
+
+  .card-form-grid {
+    grid-template-columns: 1fr;
+  }
+
+  #card-data {
+    justify-content: center;
+  }
+}

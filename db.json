@@ -1,0 +1,37 @@
+{
+  "micaela": [
+    {
+      "name": "Link",
+      "lastname": "Zelda",
+      "url": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQDnkarjgmi9N77PdNOBlHbX4fVijhFsMMbpQ&s",
+      "birthdate": "1986-02-21",
+      "description": "Protagonista de The Legend Of Zelda",
+      "id": "rUaTDkx7krM"
+    },
+    {
+      "name": "Tony",
+      "lastname": "Vercetti",
+      "url": "https://static.wikia.nocookie.net/gtawiki/images/a/ae/TommyVercetti-GTAVC.jpg/revision/latest?cb=20220618090315",
+      "birthdate": "1951-03-12",
+      "description": "Ex-convicto, lider de la mafia en Vice City\n",
+      "id": "PDxAgPnO8cM"
+    },
+    {
+      "name": "Carl",
+      "lastname": "Johnson",
+      "url": "https://static.wikia.nocookie.net/gtawiki/images/7/70/CJ-GTASA.png/revision/latest/scale-to-width-down/536?cb=20260330025009",
+      "birthdate": "1970-03-12",
+      "description": "Pandillero de el Groove Street",
+      "id": "6aQoY1j20cM"
+    },
+    {
+      "name": "Michael",
+      "lastname": "De santa",
+      "url": "https://static.wikia.nocookie.net/gtawiki/images/2/27/MichaelDeSanta-GTAOee-Portrait.png/revision/latest/scale-to-width-down/536?cb=20251210124259",
+      "birthdate": "1968-09-12",
+      "description": "Mente criminal, actualmente jubilado",
+      "id": "gZ1jPo-4x4w"
+    }
+  ],
+  "$schema": "./node_modules/json-server/schema.json"
+}
